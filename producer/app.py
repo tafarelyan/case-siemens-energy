@@ -25,5 +25,5 @@ if __name__ == '__main__':
     while True:
         message = generate_message()
         producer.send(KAFKA_TOPIC, value=message)
-        print(f'Messagem enviada do producer: {message}')
-        time.sleep(10)
+        # print(f'Messagem enviada do producer: {message}')
+        time.sleep(1)

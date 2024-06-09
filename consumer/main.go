@@ -24,7 +24,7 @@ func main() {
 		if err != nil {
 			break
 		}
-		fmt.Printf("message at offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
+		fmt.Printf("Mensagem no offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
 	}
 
 	if err := r.Close(); err != nil {

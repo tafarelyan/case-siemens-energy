@@ -28,14 +28,10 @@ services:
 
   producer:
     build: './producer'
-    container_name: producer
-    command: ["python", 'app.py']
     depends_on:
       - kafka
 
   consumer:
     build: './consumer'
-    container_name: consumer
-    command: ["./main"]
     depends_on:
       - kafka
