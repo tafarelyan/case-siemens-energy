@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/segmentio/kafka-go"
 )
@@ -21,14 +20,8 @@ func main() {
 
 	for {
 		m, err := r.ReadMessage(context.Background())
-		if err != nil {
-			break
+		if err == nil {
+			fmt.Printf("Mensagem no offset %d: %s\n", m.Offset, string(m.Value))
 		}
-		fmt.Printf("Mensagem no offset %d: %s\n", m.Offset, string(m.Value))
 	}
-
-	if err := r.Close(); err != nil {
-		log.Fatal("Reader sem sucesso para fechar:", err)
-	}
-
 }
