@@ -1,3 +1,9 @@
+Para executar a aplicação, execute o comando abaixo
+``` bash
+docker-compose up --build
 ```
-docker-compose exec kafka kafka-topics --create --topic test-topic --bootstrap-server kafka:9092 --partitions 3 --replication-factor 1
-``` 
+
+Obs: Existe a possibilidade do serviço consumidor não funcionar devido ao tempo de inicialização do kafka, então caso o serviço não iniciar, execute o seguinte comando
+```bash
+docker-compose run consumer
+```

@@ -24,11 +24,11 @@ func main() {
 		if err != nil {
 			break
 		}
-		fmt.Printf("Mensagem no offset %d: %s = %s\n", m.Offset, string(m.Key), string(m.Value))
+		fmt.Printf("Mensagem no offset %d: %s\n", m.Offset, string(m.Value))
 	}
 
 	if err := r.Close(); err != nil {
-		log.Fatal("failed to close reader:", err)
+		log.Fatal("Reader sem sucesso para fechar:", err)
 	}
 
 }
