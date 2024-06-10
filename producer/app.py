@@ -2,12 +2,13 @@ import json
 import time
 import uuid
 from datetime import datetime
+from typing import Union
 
 from kafka import KafkaProducer
 from lorem_text import lorem
 
 def get_kafka_producer(
-        bootstrap_servers: str | list ,
+        bootstrap_servers: Union[str, list],
         max_retries: int = 5,
         delay: int = 5
     ) -> KafkaProducer:
