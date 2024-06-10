@@ -17,6 +17,8 @@ func main() {
 		MaxBytes:  10e6, // 10MB
 	})
 
+	defer r.Close()
+
 	for {
 		m, err := r.ReadMessage(context.Background())
 		if err == nil {
