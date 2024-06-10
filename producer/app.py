@@ -8,10 +8,10 @@ from kafka import KafkaProducer
 from lorem_text import lorem
 
 def get_kafka_producer(
-        bootstrap_servers: Union[str, list],
-        max_retries: int = 5,
-        delay: int = 5
-    ) -> KafkaProducer:
+    bootstrap_servers: Union[str, list],
+    max_retries: int = 5,
+    delay: int = 5
+) -> KafkaProducer:
     for _ in range(max_retries):
         try:
             return KafkaProducer(
