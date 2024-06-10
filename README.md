@@ -1,5 +1,5 @@
 ## Execução da aplicação
-Para rodar a aplicação, execute o comando abaixo
+Para instalar e rodar a aplicação, execute o comando abaixo
 ``` bash
 docker-compose up --build
 ```

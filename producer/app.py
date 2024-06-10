@@ -6,23 +6,19 @@ from datetime import datetime
 from kafka import KafkaProducer
 from lorem_text import lorem
 
-MAX_RETRIES = 5
-DELAY = 5
-KAFKA_TOPIC = 'siemens_energy'
-KAFKA_BOOTSTRAP_SERVERS = 'kafka:9092'
+def get_kafka_producer(bootstrap_servers, max_retries=5, delay=5) -> KafkaProducer:
+    for _ in range(max_retries):
+        try:
+            return KafkaProducer(
+                bootstrap_servers=bootstrap_servers,
+                value_serializer=lambda v: json.dumps(v).encode('utf-8')
+            )
+        except Exception as e:
+            print(f'Conexão falhou: {e}')
+            time.sleep(delay)
+    else:
+        raise Exception('Não deu pra conectar com o Kafka depois de várias tentativas')
 
-for _ in range(MAX_RETRIES):
-    try:
-        producer = KafkaProducer(
-            bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
-            value_serializer=lambda v: json.dumps(v).encode('utf-8')
-        )
-        break
-    except Exception as e:
-        print(f'Conexão falhou: {e}')
-        time.sleep(DELAY)
-else:
-    raise Exception('Não deu pra conectar com o Kafka depois de várias tentativas')
 
 def generate_message() -> dict:
     return {
@@ -31,9 +27,15 @@ def generate_message() -> dict:
         'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     }
 
+
 if __name__ == '__main__':
+    kafka_topic = 'siemens_energy'
+    kafka_bootstrap_servers = ['kafka:9092']
+
+    producer = get_kafka_producer(bootstrap_servers=kafka_bootstrap_servers)
+
     while True:
         message = generate_message()
-        producer.send(KAFKA_TOPIC, value=message)
-        # print(f'Messagem enviada do producer: {message}')
+        producer.send(kafka_topic, value=message)
+        # print(f'Messagem enviada do produtor: {message}')
         time.sleep(1)

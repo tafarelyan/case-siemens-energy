@@ -9,10 +9,9 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092 # para rodar local
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 # para rodar local
     ports:
       - "9092:9092"
   kafdrop:
@@ -23,8 +22,6 @@ services:
       - "9000:9000"
     environment:
       KAFKA_BROKERCONNECT: "kafka:9092"
-      JVM_OPTS: "-Xms32M -Xmx64M"
-    command: ["--message.format=json"]
 
   producer:
     build: './producer'

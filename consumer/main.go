@@ -14,7 +14,6 @@ func main() {
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:   []string{brokerAddress},
 		Topic:     topic,
-		Partition: 0,
 		MaxBytes:  10e6, // 10MB
 	})
 
